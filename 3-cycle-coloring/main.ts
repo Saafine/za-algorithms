@@ -1,4 +1,3 @@
-import { PrintParams } from './model';
 import { addLeftPadding, numToBinary, prettyPrint } from './helpers';
 
 export function run3cycleColoring(input: number[], stage = 1): void {
@@ -8,10 +7,36 @@ export function run3cycleColoring(input: number[], stage = 1): void {
 
     prettyPrint({ binaries, kValues, bits, cValues, stage, input });
 
-    if (isNextNeeded(cValues)) {
-        run3cycleColoring(cValues, stage + 1);
+    if (isInputReduced(cValues)) {
+        runForK(cValues);
     } else {
+        run3cycleColoring(cValues, stage + 1);
+    }
+}
+
+function runForK(cValues: number[], k = 5) {
+    const cValuesReduced = [];
+
+    for (let x = 0; x < cValues.length; x++) {
+     const c = cValues[x];
+     if (c !== k) {
+         cValuesReduced.push(c);
+     } else {
+         const options = [0, 1, 2, 3, 4]
+         const topNeighbour = cValues[x - 1] || cValues[cValues.length - 1]; // top or last
+         const bottomNeighbour = cValues[x + 1] || cValues[0]; // bottom or first
+         const minNeighbour = options.find((option) => option !== topNeighbour && option !== bottomNeighbour);
+         cValuesReduced.push(minNeighbour);
+     }
+    }
+
+    console.log('k', k);
+    console.log(cValuesReduced);
+
+    if (k === 3) {
         console.log('Done');
+    } else {
+        runForK(cValuesReduced, k - 1);
     }
 }
 
@@ -46,7 +71,7 @@ function getCValues(kValues: number[], bits: number[]): number[] {
     return kValues.map((k, index) => k * 2 + bits[index]);
 }
 
-function isNextNeeded(cValues: number[]): boolean {
+function isInputReduced(cValues: number[]): boolean {
     return cValues.some((c) => c > 5);
 }
 
