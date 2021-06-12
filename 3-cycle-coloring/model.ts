@@ -5,5 +5,9 @@ export interface PrintParams {
     kValues: number[];
     bits: number[];
     stage: number;
+}
 
+export interface PrintRunForKParams {
+    k: number;
+    cValues: number[];
 }

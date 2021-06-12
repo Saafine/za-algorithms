@@ -1,4 +1,4 @@
-import { PrintParams } from './model';
+import { PrintParams, PrintRunForKParams } from './model';
 
 export function numToBinary(num: number): string {
     return (num >>> 0).toString(2);
@@ -15,4 +15,11 @@ export function prettyPrint({ input, cValues, binaries, kValues, bits, stage }: 
     cValues.forEach((cValue, index) => {
         console.log(`${input[index]} | ${binaries[index]} | ${kValues[index]} | ${bits[index]} | ${cValue}`)
     })
+}
+
+export function prettyPrintRunForK({k, cValues}: PrintRunForKParams) {
+     console.log(` ------------------- ETAP k=${k} ---------------------`);
+     cValues.forEach((cValue, index) => {
+         console.log(`${cValue}`)
+     })
 }

@@ -1,4 +1,4 @@
-import { addLeftPadding, numToBinary, prettyPrint } from './helpers';
+import { addLeftPadding, numToBinary, prettyPrint, prettyPrintRunForK } from './helpers';
 
 export function run3cycleColoring(input: number[], stage = 1): void {
   const binaries: string[] = input.map(numToBinary).map(addLeftPadding);
@@ -36,8 +36,7 @@ function runForK(cValues: number[], k = 5) {
     }
   }
 
-  console.log('k', k);
-  console.log(cValuesReduced);
+  prettyPrintRunForK({k, cValues: cValuesReduced})
 
   if (k === 3) {
     console.log('Done');
