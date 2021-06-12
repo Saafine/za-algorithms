@@ -6,7 +6,7 @@ export function run3cycleColoring(input: number[], stage = 0): void {
     const { kValues, bits } = getKwithBit(binaries);
     const cValues = getCValues(kValues, bits);
 
-    prettyPrint({ binaries, kValues, bits, cValues, stage });
+    prettyPrint({ binaries, kValues, bits, cValues, stage, input });
 
     if (isNextNeeded(cValues)) {
         run3cycleColoring(cValues, stage + 1);

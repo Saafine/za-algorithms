@@ -9,8 +9,10 @@ export function addLeftPadding(binary: string, _, source: string[]): string {
     return binary.padStart(maxLen, '0');
 }
 
-export function prettyPrint({ cValues, binaries, kValues, bits, stage }: PrintParams) {
-    console.log('-----------------------------------------------------');
+export function prettyPrint({ input, cValues, binaries, kValues, bits, stage }: PrintParams) {
     console.log(` ------------------- ETAP ${stage} ---------------------`);
-    console.log('-----------------------------------------------------');
+    console.log(`c | bin | k | bit | c'`);
+    cValues.forEach((cValue, index) => {
+        console.log(`${input[index]} | ${binaries[index]} | ${kValues[index]} | ${bits[index]} | ${cValue}`)
+    })
 }
