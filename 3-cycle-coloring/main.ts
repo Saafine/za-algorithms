@@ -1,7 +1,7 @@
 import { PrintParams } from './model';
 import { addLeftPadding, numToBinary, prettyPrint } from './helpers';
 
-export function run3cycleColoring(input: number[], stage = 0): void {
+export function run3cycleColoring(input: number[], stage = 1): void {
     const binaries: string[] = input.map(numToBinary).map(addLeftPadding);
     const { kValues, bits } = getKwithBit(binaries);
     const cValues = getCValues(kValues, bits);
@@ -25,17 +25,15 @@ function getKwithBit(binary: string[]): { kValues: number[], bits: number[] } {
         const current = binary[x];
         const next = binary[x + 1] || binary[0];
         let k = 0;
-        let lastMatchingBit = current[binaryLength - 1];
 
         for (let bitIndex = binaryLength - 1; bitIndex >= 0; bitIndex--) {
             const currentBit = current[bitIndex];
             const nextBit = next[bitIndex];
             if (currentBit === nextBit) {
                 k++;
-                lastMatchingBit = currentBit;
             } else {
                 kValues.push(k);
-                bits.push(Number(lastMatchingBit));
+                bits.push(Number(currentBit));
                 break;
             }
         }
