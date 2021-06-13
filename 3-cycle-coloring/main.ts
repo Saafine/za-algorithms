@@ -41,12 +41,10 @@ function runForK(cValues: number[], k = 5) {
     }
   }
 
-  // console.log('k', k);
-  // console.log(cValuesReduced);
+  prettyPrintRunForK({k, cValues: cValuesReduced})
 
   if (k === 3) {
-    // console.log('Done');
-  // prettyPrintRunForK({k, cValues: cValuesReduced})
+    console.log('Done');
   } else {
     runForK(cValuesReduced, k - 1);
   }
