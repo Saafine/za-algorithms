@@ -1,16 +1,21 @@
 import { addLeftPadding, numToBinary, prettyPrint } from './helpers';
 
-export function run3cycleColoring(input: number[], stage = 1): void {
+export function run3cycleColoring(input: number[], stage = 1, isFound?: any, shouldStop?: any, shouldPrint = true): void {
   const binaries: string[] = input.map(numToBinary).map(addLeftPadding);
   const { kValues, bits } = getKwithBit(binaries);
   const cValues = getCValues(kValues, bits);
 
-  prettyPrint({ binaries, kValues, bits, cValues, stage, input });
+  shouldPrint && prettyPrint({ binaries, kValues, bits, cValues, stage, input });
+
+  if (isFound && isFound({stage, cValues})) {
+    throw Error('Found')
+  }
+  if (shouldStop && shouldStop({stage, cValues})) return;
 
   if (!isInputReduced(cValues)) {
     runForK(cValues);
   } else {
-    run3cycleColoring(cValues, stage + 1);
+    run3cycleColoring(cValues, stage + 1, isFound, shouldStop, shouldPrint);
   }
 }
 
@@ -36,11 +41,11 @@ function runForK(cValues: number[], k = 5) {
     }
   }
 
-  console.log('k', k);
-  console.log(cValuesReduced);
+  // console.log('k', k);
+  // console.log(cValuesReduced);
 
   if (k === 3) {
-    console.log('Done');
+    // console.log('Done');
   } else {
     runForK(cValuesReduced, k - 1);
   }

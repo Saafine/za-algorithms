@@ -103,17 +103,17 @@ def _tree_in_woods_loop(S, i):
 if __name__ == "__main__":
 
     # Przykład z ćwiczeń wyznaczania drzewa w lesie
-    # P = [12,7,16,7,14,8,7,16,2,5,2,12,8,9,10,12]
-    # tree_in_wood(P)
+    P = [12,7,16,7,14,8,7,16,2,5,2,12,8,9,10,12]
+    tree_in_wood(P)
 
     # Przykład z ćwiczeń sum sufiksowych
     # NEXT = [5,4,8,7,3,1,6,0]
     # W = [3,5,2,1,7,2,1,2]
     # Przykład z powtórki sum sufiksowych
-    NEXT = [3,1,8,2,6,0,4,5]
-    W = [2,4,5,6,3,1,5,2]
-    sufix_list(NEXT,W)
-    #
+    # NEXT = [3,1,8,2,6,0,4,5]
+    # W = [2,4,5,6,3,1,5,2]
+    # sufix_list(NEXT,W)
+
     # # Przykład z ćwiczeń sum prefiksowych
     # NEXT = [6,8,1,0,7,4,2,3]
     # W = [3,2,1,1,2,3,3,2]
