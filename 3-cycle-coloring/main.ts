@@ -1,4 +1,4 @@
-import { addLeftPadding, numToBinary, prettyPrint } from './helpers';
+import { addLeftPadding, numToBinary, prettyPrint, prettyPrintRunForK } from './helpers';
 
 export function run3cycleColoring(input: number[], stage = 1, isFound?: any, shouldStop?: any, shouldPrint = true): void {
   const binaries: string[] = input.map(numToBinary).map(addLeftPadding);
@@ -29,13 +29,13 @@ function runForK(cValues: number[], k = 5) {
     } else {
       const options = [0, 1, 2, 3, 4];
       const topNeighbour =
-        cValues[x - 1] !== undefined
-          ? cValues[x - 1]
-          : cValues[cValues.length - 1]; // top or last
+          cValues[x - 1] !== undefined
+              ? cValues[x - 1]
+              : cValues[cValues.length - 1]; // top or last
       const bottomNeighbour =
-        cValues[x + 1] !== undefined ? cValues[x + 1] : cValues[0]; // bottom or first
+          cValues[x + 1] !== undefined ? cValues[x + 1] : cValues[0]; // bottom or first
       const minNeighbour = options.find(
-        option => option !== topNeighbour && option !== bottomNeighbour
+          option => option !== topNeighbour && option !== bottomNeighbour
       );
       cValuesReduced.push(minNeighbour);
     }
@@ -46,6 +46,7 @@ function runForK(cValues: number[], k = 5) {
 
   if (k === 3) {
     // console.log('Done');
+  // prettyPrintRunForK({k, cValues: cValuesReduced})
   } else {
     runForK(cValuesReduced, k - 1);
   }
